@@ -12,7 +12,7 @@ package SYSTEM;
 public class PokemonInfo {
 
     
-    //ATRIBUTOS DE LOS POKEMON
+    //   ATRIBUTOS DE LOS POKEMON     //
     String Especie;
     String Nombre;
     int Ataque;
