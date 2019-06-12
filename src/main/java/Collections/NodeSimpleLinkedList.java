@@ -5,8 +5,12 @@
  */
 package Collections;
 
+/**
+ *
+ * @author chech
+ */
 
-public class NodeSimpleLinkedList<T> {
+    public class NodeSimpleLinkedList<T> {
     NodeSimpleLinkedList <T> next;
     T value;
 
@@ -42,3 +46,4 @@ public class NodeSimpleLinkedList<T> {
     
     
 }
+

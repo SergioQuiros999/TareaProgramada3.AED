@@ -4,12 +4,17 @@
  * and open the template in the editor.
  */
 package Collections;
-
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ *
+ * @author chech
+ */
+
+    
 public class SimpleLinkeList<T> implements List<T> {
 
     NodeSimpleLinkedList<T> head;
@@ -215,6 +220,7 @@ public class SimpleLinkeList<T> implements List<T> {
         return oldValue;
 
     }
+    
 
     @Override
     public int indexOf(Object o) {
@@ -242,3 +248,4 @@ public class SimpleLinkeList<T> implements List<T> {
     }
 
 }
+
