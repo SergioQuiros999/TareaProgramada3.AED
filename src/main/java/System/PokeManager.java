@@ -5,8 +5,12 @@
  */
 package System;
 
+import Collections.ControladorGrafo;
+import Collections.Dijkstra;
 import Collections.Grafo;
+import Collections.Grafo_1;
 import Collections.SimpleLinkeList;
+import Collections.Vertice;
 import com.sun.jmx.remote.internal.ArrayQueue;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,6 +24,8 @@ import java.util.List;
 public class PokeManager {
 
     Grafo lugares = new Grafo();
+    
+    ControladorGrafo lugar=new ControladorGrafo();
     List<Busqueda> busqueda = new SimpleLinkeList<>();
     List<Busqueda> lugarespreterminados = new SimpleLinkeList<>();
     List<String> aristas= new SimpleLinkeList<>();
@@ -73,6 +79,11 @@ public class PokeManager {
         instance.lugares.agregarVertice("Tienda Pokemon");
         instance.lugares.agregarVertice("Restaurante Pokemon");
         instance.lugares.agregarVertice("Punto de Captura");
+        instance.lugar.nuevoVertice("Hospital Pokemon",".");
+        instance.lugar.nuevoVertice("Gimnasio Pokemon",".");
+        instance.lugar.nuevoVertice("Tienda Pokemon",".");
+        instance.lugar.nuevoVertice("Restaurante Pokemon",".");
+        instance.lugar.nuevoVertice("Punto de Captura",".");
       
         }
     public void AddBusqueda(Busqueda item){
@@ -106,12 +117,24 @@ public class PokeManager {
     
     public void Addplace(String vertice){
     lugares.agregarVertice(vertice);
+    lugar.nuevoVertice(vertice, ".");
     }
     public void Removeplace(String vertice){
     lugares.eliminarVertice(vertice);
     }
     public void Addroad(String origen,String destino,int distancia,int tiempo){
     lugares.agregarArista(origen, destino, distancia,tiempo);
+    int size=lugar.getVertices().size();
+    int x=0;
+    int y=0;
+    for(int i=0;i<size;i++){
+    if(lugar.getVertices().get(i).getId()==origen){
+    x=i;
+    }
+    if(lugar.getVertices().get(i).getId()==destino){
+    y=i;
+    }}
+    lugar.nuevaArista(origen, x, y, distancia);
     }
     public void Removeroad(String origen,String destino){
     lugares.eliminarArista(origen, destino);
@@ -124,6 +147,24 @@ public class PokeManager {
     }
     public String GetPlacebyint(int place){
     return lugares.getVerticebyindex(place);
+    }
+    public String Djikstra(String origen,String Destino){
+    Grafo_1 grafo = new Grafo_1(lugar.getVertices(), lugar.getAristas());
+    Dijkstra shortestRoute = new Dijkstra(grafo);
+    int size=lugar.getVertices().size();
+    int x=0;
+    int y=0;
+    for(int i=0;i<size;i++){
+    if(lugar.getVertices().get(i).getId()==origen){
+    x=i;
+    }
+    if(lugar.getVertices().get(i).getId()==Destino){
+    y=i;
+    }}
+    shortestRoute.ejecutarGrafo(shortestRoute.getVertices().get(x));
+    LinkedList<Vertice<Object>> p =shortestRoute.obtenerListadoCamino(shortestRoute.getVertices().get(y));
+    String camino=p.toString();
+    return camino;
     }
        
 
