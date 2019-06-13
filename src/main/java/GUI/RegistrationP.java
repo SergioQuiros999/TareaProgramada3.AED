@@ -8,14 +8,23 @@ package GUI;
 import javax.swing.JOptionPane;
 import SYSTEM.*;
 import Collections.*;
+import System.PokeManager;
 
 /**
  *
  * @author chech
  */
 public class RegistrationP extends javax.swing.JFrame {
-Manager Registro = new Manager();
-     ListaPokemon listaAutos = new ListaPokemon();
+
+    Manager Registro = new Manager();
+    ListaPokemon listaAutos = new ListaPokemon();
+
+    private PokemonInfo poke;
+
+    public PokemonInfo getPoke() {
+        return poke;
+    }
+
     /**
      * Creates new form RegistrationP
      */
@@ -213,14 +222,15 @@ Manager Registro = new Manager();
         Integer crearAtaque;
         Integer crearDefensa;
         Integer crearVelocidad;
-        String crearAtEepecial;
+        String crearAtEspecial;
         String crearDefEspecial;
         String crearPreevolucion;
         String crearPosibleEvolucion;
         String Padre;
         String Hijos;
-        int Existentes=0;
-        
+        PokemonInfo pop = null;
+        PokemonInfo fof = null;
+        int Existentes = 0;
 
         boolean existe = false;
 
@@ -229,37 +239,66 @@ Manager Registro = new Manager();
         crearAtaque = Integer.parseInt(this.TxtAtaque.getText());
         crearDefensa = Integer.parseInt(this.TxtDefensa.getText());
         crearVelocidad = Integer.parseInt(this.TxtVelocidad.getText());
-        crearAtEepecial = this.TxtAtaqEspecial.getText();
+        crearAtEspecial = this.TxtAtaqEspecial.getText();
         crearDefEspecial = this.TxtDefEspecial.getText();
         crearPreevolucion = this.TxtPreevolucion.getText();
         crearPosibleEvolucion = this.TxtPosibleEvol.getText();
         Padre = this.TxtPadre.getText();
         Hijos = this.TxtHijos.getText();
+
+        this.poke = new PokemonInfo();
+        this.poke.setEspecie(crearEspecie);
+        this.poke.setNombre(crearNombre);
+        this.poke.setAtaque(crearAtaque);
+        this.poke.setDefensa(crearDefensa);
+        this.poke.setVelocidad(crearVelocidad);
+        this.poke.setAtaqueEspecial(crearAtEspecial);
+        this.poke.setDefensaEspecial(crearDefEspecial);
+        this.poke.setPreevolucion(crearPreevolucion);
+        this.poke.setPosibleEvolucion(crearPosibleEvolucion);
         
-        
-try{
-        //se tiene problemas validando los datos de tipo Integer
-        if (crearEspecie.equals("") || crearNombre.equals("") || crearAtEepecial.equals("") || crearDefEspecial.equals("")
-                || crearPreevolucion.equals("") || crearPosibleEvolucion.equals("") || Padre.equals("")
-                || Hijos.equals("") ) {
-            JOptionPane.showMessageDialog(null, "Funcion invalida,\n"
-                    + "Ingrese todos los datos");
-        } else {
-            PokemonInfo obj = new PokemonInfo(crearEspecie, crearNombre, crearAtaque, crearDefensa, crearVelocidad, crearAtEepecial, crearDefEspecial, crearPreevolucion, crearPosibleEvolucion, Padre, Hijos,Existentes);
-             Registro.insertarPokemon(obj);
-            if (!existe) {
-                        //jComboBox1.addItem(crearmodelo);
-                //jComboBox1.addItem(crearmarca + ", "+ crearmodelo + ", $"+ crearprecio);
-                //jComboBox1.repaint();
-               // jComboBox3.addItem(crearmarca + ", " + crearmodelo + ", " + creartipo + ", " + creardescripcion + ", " + crearcilindrada + ", " + creartipoalimentacion + ", " + creartransmision + ", " + crearcolores + ", " + crearcaracteristicas + ", $" + crearprecio + ", " + crearcantidaddisponible + ", " + definiragencia);
-                //jComboBox3.repaint();
-            } else {
-                JOptionPane.showMessageDialog(null, "No agregado");
+        for (int i = 0; PokeManager.getInstance().GetPoke().size() > i; i++) {
+            if ((PokeManager.getInstance().GetPoke().get(i)).getNombre().equals(Padre)) {
+                this.poke.setPadre(PokeManager.getInstance().GetPoke().get(i));
+                i = PokeManager.getInstance().GetPoke().size();
             }
+            pop = PokeManager.getInstance().GetPoke().get(i);
         }
-}catch(Exception ex){
-}
-    
+        
+        for (int y = 0; PokeManager.getInstance().GetPoke().size() > y; y++) {
+            if ((PokeManager.getInstance().GetPoke().get(y)).getNombre().equals(Hijos)) {
+                this.poke.setHijos(PokeManager.getInstance().GetPoke().get(y));
+                y = PokeManager.getInstance().GetPoke().size();
+            }
+            fof = PokeManager.getInstance().GetPoke().get(y);
+        }
+
+        this.poke.setExistentes(Existentes + 1);
+
+        PokeManager.getInstance().AddPoke(poke);
+
+        try {
+            //se tiene problemas validando los datos de tipo Integer
+            if (crearEspecie.equals("") || crearNombre.equals("") || crearAtEspecial.equals("") || crearDefEspecial.equals("")
+                    || crearPreevolucion.equals("") || crearPosibleEvolucion.equals("") || Padre.equals("")
+                    || Hijos.equals("")) {
+                JOptionPane.showMessageDialog(null, "Funcion invalida,\n"
+                        + "Ingrese todos los datos");
+            } else {
+                PokemonInfo obj = new PokemonInfo(crearEspecie, crearNombre, crearAtaque, crearDefensa, crearVelocidad, crearAtEspecial, crearDefEspecial, crearPreevolucion, crearPosibleEvolucion, pop, fof, Existentes);
+                Registro.insertarPokemon(obj);
+                if (!existe) {
+                    //jComboBox1.addItem(crearmodelo);
+                    //jComboBox1.addItem(crearmarca + ", "+ crearmodelo + ", $"+ crearprecio);
+                    //jComboBox1.repaint();
+                    // jComboBox3.addItem(crearmarca + ", " + crearmodelo + ", " + creartipo + ", " + creardescripcion + ", " + crearcilindrada + ", " + creartipoalimentacion + ", " + creartransmision + ", " + crearcolores + ", " + crearcaracteristicas + ", $" + crearprecio + ", " + crearcantidaddisponible + ", " + definiragencia);
+                    //jComboBox3.repaint();
+                } else {
+                    JOptionPane.showMessageDialog(null, "No agregado");
+                }
+            }
+        } catch (Exception ex) {
+        }
 
 
     }//GEN-LAST:event_jButton1ActionPerformed

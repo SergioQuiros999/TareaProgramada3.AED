@@ -11,7 +11,6 @@ package SYSTEM;
  */
 public class PokemonInfo {
 
-    
     //   ATRIBUTOS DE LOS POKEMON     //
     String Especie;
     String Nombre;
@@ -22,14 +21,12 @@ public class PokemonInfo {
     String DefensaEspecial;
     String Preevolucion;
     String PosibleEvolucion;
-    String Padre;
-    String Hijos;
-    int CantidadDeVehiculos=0;
+    PokemonInfo Padre;
+    PokemonInfo Hijos;
+    int Existentes = 0;
 
-    
     //CONSTRUCTOR DE LA CLASE//
-    
-    public PokemonInfo(String Especie, String Nombre, int Ataque, int Defensa, int Velocidad, String AtaqueEspecial, String DefensaEspecial, String Preevolucion, String PosibleEvolucion, String Padre, String Hijos, int CantidadDeVehiculos) {
+    public PokemonInfo(String Especie, String Nombre, int Ataque, int Defensa, int Velocidad, String AtaqueEspecial, String DefensaEspecial, String Preevolucion, String PosibleEvolucion, PokemonInfo Padre, PokemonInfo Hijos, int Existentes) {
         this.Especie = Especie;
         this.Nombre = Nombre;
         this.Ataque = Ataque;
@@ -41,13 +38,14 @@ public class PokemonInfo {
         this.PosibleEvolucion = PosibleEvolucion;
         this.Padre = Padre;
         this.Hijos = Hijos;
-        this.CantidadDeVehiculos = CantidadDeVehiculos;
-       
+        this.Existentes = Existentes;
+
     }
 
-    
-    //SETTERS AND GETTERS
+    public PokemonInfo() {
+    }
 
+    //SETTERS AND GETTERS
     public String getEspecie() {
         return Especie;
     }
@@ -120,33 +118,28 @@ public class PokemonInfo {
         this.PosibleEvolucion = PosibleEvolucion;
     }
 
-    public String getPadre() {
+    public PokemonInfo getPadre() {
         return Padre;
     }
 
-    public void setPadre(String Padre) {
+    public void setPadre(PokemonInfo Padre) {
         this.Padre = Padre;
     }
 
-    public String getHijos() {
+    public PokemonInfo getHijos() {
         return Hijos;
     }
 
-    public void setHijos(String Hijos) {
+    public void setHijos(PokemonInfo Hijos) {
         this.Hijos = Hijos;
     }
 
-    public int getCantidadDeVehiculos() {
-        return CantidadDeVehiculos;
+    public int getExistentes() {
+        return Existentes;
     }
 
-    public void setCantidadDeVehiculos(int CantidadDeVehiculos) {
-        this.CantidadDeVehiculos = CantidadDeVehiculos;
-    }
-    
-    
-    
+    public void setExistentes(int Existentes) {
+        this.Existentes = Existentes;
     }
 
-    
-    
+}

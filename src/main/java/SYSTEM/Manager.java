@@ -49,9 +49,9 @@ public class Manager {
                
                if (pokemon.getEspecie()==comparar.getEspecie()){ //se busca si el modelo que se quiere agregar ya se enuentra en la lista
                     
-                   pokemon.CantidadDeVehiculos+=1;     //si el modelo ya existe se le agreca uno a esa cantidad
+                   pokemon.Existentes+=1;     //si el modelo ya existe se le agreca uno a esa cantidad
                     System.out.println("aumentado");
-                    System.out.println(comparar.getCantidadDeVehiculos());
+                    System.out.println(comparar.getExistentes());
                     break;
                 }
                 else{
