@@ -8,7 +8,6 @@ package GUI;
 import javax.swing.JOptionPane;
 import SYSTEM.*;
 import Collections.*;
-import System.PokeManager;
 
 /**
  *
@@ -65,6 +64,7 @@ public class RegistrationP extends javax.swing.JFrame {
         TxtPosibleEvol = new javax.swing.JTextField();
         TxtHijos = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +98,13 @@ public class RegistrationP extends javax.swing.JFrame {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -144,7 +151,7 @@ public class RegistrationP extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(TxtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,13 +160,20 @@ public class RegistrationP extends javax.swing.JFrame {
                                     .addComponent(TxtAtaque, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(TxtDefensa, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(111, 111, 111))
+                .addGap(16, 16, 16)
+                .addComponent(jButton2)
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -216,7 +230,7 @@ public class RegistrationP extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //CREAR VEHICULO
+        //Crear pokemon.
         String crearEspecie;
         String crearNombre;
         Integer crearAtaque;
@@ -256,26 +270,38 @@ public class RegistrationP extends javax.swing.JFrame {
         this.poke.setDefensaEspecial(crearDefEspecial);
         this.poke.setPreevolucion(crearPreevolucion);
         this.poke.setPosibleEvolucion(crearPosibleEvolucion);
-        
-        for (int i = 0; PokeManager.getInstance().GetPoke().size() > i; i++) {
-            if ((PokeManager.getInstance().GetPoke().get(i)).getNombre().equals(Padre)) {
-                this.poke.setPadre(PokeManager.getInstance().GetPoke().get(i));
-                i = PokeManager.getInstance().GetPoke().size();
+
+        if (PokeManager.getInstance().GetPoke().isEmpty()) {
+
+            this.poke.setPadre(null);
+            this.poke.setHijos(null);
+
+        } else {
+            for (int i = 0; PokeManager.getInstance().GetPoke().size() > i; i++) {
+                if ((PokeManager.getInstance().GetPoke().get(i)).getNombre().equals(Padre)) {
+                    this.poke.setPadre(PokeManager.getInstance().GetPoke().get(i));
+                    i = PokeManager.getInstance().GetPoke().size();
+                }
+                //pop = PokeManager.getInstance().GetPoke().get(i);
             }
-            pop = PokeManager.getInstance().GetPoke().get(i);
-        }
-        
-        for (int y = 0; PokeManager.getInstance().GetPoke().size() > y; y++) {
-            if ((PokeManager.getInstance().GetPoke().get(y)).getNombre().equals(Hijos)) {
-                this.poke.setHijos(PokeManager.getInstance().GetPoke().get(y));
-                y = PokeManager.getInstance().GetPoke().size();
+
+            for (int y = 0; PokeManager.getInstance().GetPoke().size() > y; y++) {
+                if ((PokeManager.getInstance().GetPoke().get(y)).getNombre().equals(Hijos)) {
+                    this.poke.setHijos(PokeManager.getInstance().GetPoke().get(y));
+                    y = PokeManager.getInstance().GetPoke().size();
+                }
+                //fof = PokeManager.getInstance().GetPoke().get(y);
             }
-            fof = PokeManager.getInstance().GetPoke().get(y);
         }
 
         this.poke.setExistentes(Existentes + 1);
 
         PokeManager.getInstance().AddPoke(poke);
+        PokeManager.getInstance().Addfamilly(crearNombre);
+        PokeManager.getInstance().Addfamilly(Padre);
+        PokeManager.getInstance().Addfamilly(Hijos);
+        PokeManager.getInstance().AddRelation(crearNombre, Padre, 1, 1);
+        PokeManager.getInstance().AddRelation(crearNombre, Hijos, 1, 1);
 
         try {
             //se tiene problemas validando los datos de tipo Integer
@@ -302,6 +328,12 @@ public class RegistrationP extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        PokemonAdministration usuario = new PokemonAdministration();
+        usuario.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -351,6 +383,7 @@ public class RegistrationP extends javax.swing.JFrame {
     private javax.swing.JTextField TxtPreevolucion;
     private javax.swing.JTextField TxtVelocidad;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

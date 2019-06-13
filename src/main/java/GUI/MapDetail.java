@@ -5,8 +5,7 @@
  */
 package GUI;
 
-import System.Busqueda;
-import System.PokeManager;
+import SYSTEM.*;
 import javax.swing.table.DefaultTableModel;
 
 /**

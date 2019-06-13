@@ -24,11 +24,12 @@ import java.util.List;
 public class PokeManager {
 
     Grafo lugares = new Grafo();
-
+    Grafo genealogico = new Grafo();
     ControladorGrafo lugar = new ControladorGrafo();
     List<Busqueda> busqueda = new SimpleLinkeList<>();
     List<Busqueda> lugarespreterminados = new SimpleLinkeList<>();
     List<String> aristas = new SimpleLinkeList<>();
+    List<PokemonInfo> pokemon = new SimpleLinkeList<>();
 
     public static final PokeManager instance;
 
@@ -87,6 +88,22 @@ public class PokeManager {
 
     }
 
+    public void AddPoke(PokemonInfo item) {
+        pokemon.add(item);
+    }
+
+    public List<PokemonInfo> GetPoke() {
+        return pokemon;
+    }
+    
+    public PokemonInfo GetPokeInt(int item) {
+        return pokemon.get(item);
+    }
+
+    public void RemovePoke(int item) {
+        pokemon.remove(item);
+    }
+
     public void AddBusqueda(Busqueda item) {
         busqueda.add(item);
     }
@@ -121,6 +138,30 @@ public class PokeManager {
 
     public Busqueda GetPreterminado(int item) {
         return lugarespreterminados.get(item);
+    }
+
+    public void Addfamilly(String vertice) {
+        genealogico.agregarVertice(vertice);
+    }
+
+    public void AddRelation(String origen, String destino, int distancia, int tiempo) {
+        genealogico.agregarArista(origen, destino, 1, 1);
+    }
+
+    public void RemoveRelation(String origen, String destino) {
+        genealogico.eliminarArista(origen, destino);
+    }
+
+    public String GetRelation() {
+        return genealogico.getAristasbyindex(0);
+    }
+
+    public String GetFamilly(String pokefam) {
+        return genealogico.buscarVertice(pokefam).vertice;
+    }
+
+    public String GetFamillybyint(int pokefam) {
+        return genealogico.getVerticebyindex(pokefam);
     }
 
     public void Addplace(String vertice) {
@@ -182,6 +223,24 @@ public class PokeManager {
         LinkedList<Vertice<Object>> p = shortestRoute.obtenerListadoCamino(shortestRoute.getVertices().get(y));
         String camino = p.toString();
         return camino;
+    }
+
+    public Collection<PokemonInfo> search(PokemonInfo newInfo) {
+        List<PokemonInfo> results = new ArrayList<>();
+
+        boolean byName = newInfo.getNombre() != null && newInfo.getNombre().length() > 0;
+
+        for (PokemonInfo pokee : pokemon) {
+            boolean add = !(byName);
+            if (!add && byName && pokee.getNombre().contains(newInfo.getNombre())) {
+                add = true;
+            }
+            if (add) {
+                results.add(pokee);
+            }
+        }
+
+        return results;
     }
 
 }

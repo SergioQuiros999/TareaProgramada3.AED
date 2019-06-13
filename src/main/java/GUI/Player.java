@@ -5,9 +5,7 @@
  */
 package GUI;
 
-import System.Busqueda;
-import System.PokeManager;
-import System.PokeMap;
+import SYSTEM.*;
 
 /**
  *
@@ -68,6 +66,7 @@ public class Player extends javax.swing.JFrame {
         combocory = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -126,6 +125,14 @@ public class Player extends javax.swing.JFrame {
 
         jLabel4.setText("Cordenada y");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
+
+        jButton5.setText("Pokemon family tree");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 460, 160, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -189,6 +196,12 @@ public class Player extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_CombodirActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        PokeFamily pokemon = new PokeFamily();
+        pokemon.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -232,6 +245,7 @@ public class Player extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

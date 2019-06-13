@@ -6,8 +6,7 @@
 package GUI;
 
 
-import System.PokeManager;
-import System.PokeMap;
+import SYSTEM.*;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
