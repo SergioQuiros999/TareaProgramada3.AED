@@ -20,18 +20,15 @@ public class CreateRoute extends javax.swing.JFrame {
      */
     public CreateRoute() {
         initComponents();
-        int x=PokeManager.getInstance().GetLugarespreterminados().size();
-         int y=PokeManager.getInstance().GetBusquedaa().size();
-         for (int i=0;i<x;i++) {
-             combo.addItem(PokeManager.getInstance().GetLugarespreterminados().get(i).getName());
-             combo2.addItem(PokeManager.getInstance().GetLugarespreterminados().get(i).getName());
+         for (Busqueda busqueda : PokeManager.getInstance().GetBusquedaa()) {
+             combo.addItem(busqueda.getName());
+             combo2.addItem(busqueda.getName());
             }
-          for (int s=0;s<y;s++) {
-             combo.addItem(PokeManager.getInstance().GetBusquedaa().get(s).getName());
-             combo2.addItem(PokeManager.getInstance().GetBusquedaa().get(s).getName());
+         for (Busqueda busqueda : PokeManager.getInstance().GetLugarespreterminados()) {
+             combo.addItem(busqueda.getName());
+             combo2.addItem(busqueda.getName());
             }
          
-          
     }
 
     /**
@@ -49,8 +46,6 @@ public class CreateRoute extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        txtd = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,13 +73,6 @@ public class CreateRoute extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Ruta más corta (Djikstra)");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,16 +90,11 @@ public class CreateRoute extends javax.swing.JFrame {
                                     .addComponent(combo2, 0, 176, Short.MAX_VALUE)
                                     .addComponent(combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(jButton1))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jButton2)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(txtd)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,14 +107,10 @@ public class CreateRoute extends javax.swing.JFrame {
                     .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3))
-                .addGap(55, 55, 55)
+                .addComponent(combo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(txtd, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         pack();
@@ -199,11 +178,6 @@ public class CreateRoute extends javax.swing.JFrame {
         this.setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    PokeManager.getInstance().Djikstra(String.valueOf(combo.getSelectedItem()), String.valueOf(combo2.getSelectedItem()));
-    txtd.setText(PokeManager.getInstance().Djikstra(String.valueOf(combo.getSelectedItem()), String.valueOf(combo2.getSelectedItem())));// TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -244,9 +218,7 @@ public class CreateRoute extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combo2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
-    private javax.swing.JTextField txtd;
     // End of variables declaration//GEN-END:variables
 }
