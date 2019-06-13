@@ -99,7 +99,7 @@ public class Player extends javax.swing.JFrame {
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         panel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        panel1.add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 450, 150));
+        panel1.add(txt, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 430, 150));
 
         getContentPane().add(panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 610, 240));
 
